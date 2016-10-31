@@ -19,6 +19,7 @@ GEM
     httparty (0.14.0)
       multi_xml (>= 0.5.2)
     i18n (0.7.0)
+    id3tag (0.8.0)
     method_source (0.8.2)
     minitest (5.8.3)
     multi_xml (0.5.5)
@@ -47,6 +48,7 @@ DEPENDENCIES
   activerecord
   bcrypt
   httparty
+  id3tag
   pg
   pry
   sinatra
