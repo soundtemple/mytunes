@@ -9,6 +9,13 @@
 
 
 <body>
+  <% if logged_in? %>
+    <% @user = current_user.username %>
+    <% @action = 'Logout' %>
+  <% else %>
+    <% @user = 'Sign Up' %>
+    <% @action = 'Login' -%>
+  <% end %>
   <div class="container">
 
     <header>
@@ -28,8 +35,8 @@
 
             </ul>
           </li>
-
-          <li class="tutorials"><a href="#">Collection</a>
+          <li class="filter"><a href="#">Filter</a></li>
+          <li class="collection"><a href="#">Collection</a>
             <ul>
               <li><a href="/playlists">Playlists</a></li>
               <li><a href="/albums">Albums</a></li>
@@ -38,8 +45,11 @@
               <li><a href="/new">+ add new</a></li>
             </ul>
           </li>
-          <li class="account"><a href="/account">Account</a>
+          <li class="more"> </li>
+          <li class="account"><a href="/account"><img src="/images/user.png" alt="" /></a>
             <ul>
+                <li><a href="/account"><%= @action %></a></li>
+                <li><a href="/account"><%= @user %></a></li>
                 <li><a href="/about">About</a></li>
             </ul>
           </li>
@@ -52,7 +62,8 @@
         <%= yield %>
 
 
-      </div>
+
+
 
     <footer>
       <audio id="audio" preload="auto" tabindex="0" controls="" type="audio/mpeg">
@@ -60,8 +71,11 @@
           Sorry, your browser does not support HTML5 audio.
       </audio>
 
+
+
     </footer>
   </div>
+
   <script src="/javascript/playlist.js"></script>
 
 </body>

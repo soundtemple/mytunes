@@ -24,6 +24,7 @@ header {
 
 footer {
    position: fixed;
+   left: 0;
    bottom:0;
    width:100%;
    height:60px;   /* Height of the footer */
@@ -52,24 +53,93 @@ textarea {
    margin: auto;
 }
 
+.wrapper {
+  width: 80%;
+  margin: 0 auto;
+}
+
 .logo {
   width: 36%;
   display: inline-block;
   padding-left: 4%;
 }
 
+.cover {
+  width: 300px;
+}
+
 #logo {
   width: 150px;
+}
+
+h1 {
+  color: #444;
+  font-size: 2em;
 }
 
 h2 {
   color: #444;
 }
 
+h3 {
+  color: #444;
+}
+
+
 
 p {
   color: #444;
   font-size: 1.2em;
+}
+
+input {
+  display: block;
+  border: none;
+  border-bottom: 2px solid #444;
+  font-size: 1.4em;
+  padding: 3%;
+}
+
+button {
+  display: block;
+  width: 150px;
+  height: 50px;
+  border: none;
+  background-color: #3D5C7D;
+  margin: 5%;
+  font-size: 1.4em;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: #72a7e0;
+}
+
+.login, .new_user {
+  width: 49%;
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 auto;
+}
+
+.account_info {
+  width: 50%;
+  padding-top: 5%;
+  margin: auto;
+  text-align: center;
+}
+
+.account img {
+  width: 30px;
+  vertical-align: middle;
+}
+
+#success {
+  color: green;
+}
+
+#warning {
+  color: red;
 }
 
 /*******************************************
@@ -164,7 +234,7 @@ p {
 
 
   .nav li {
-    min-width: 150px;
+    min-width: 100px;
     border-bottom: none;
     font-size: 1.4em;
     display: inline-block;

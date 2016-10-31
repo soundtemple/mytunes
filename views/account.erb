@@ -1,1 +1,51 @@
 <h2>Account</h2>
+
+<div class="wrapper">
+
+  <div class="login">
+    <% if logged_in? %>
+    <h3 class="message" id="<%= @type %>">
+    Logged in as <%= current_user.username %>
+    </h3>
+    <form class="" action="/session" method="post">
+      <input type="hidden" name="_method" value="delete">
+      <button class="logout">logout</button>
+    </form>
+
+    <% else %>
+      <h3>Login</h3>
+      <form class="" action="/session" method="post">
+
+        <input type="input" placeholder="email"name="email" value="">
+
+        <input type="password" placeholder="password" name="password" value="">
+        <button>LOGIN</button>
+    <% end %>
+      </form>
+  </div>
+
+  <div class="new_user">
+    <form class="" action="/new_user" method="post">
+      <h3>Sign Up</h3>
+      <input type="input" placeholder="email" name="email" value="">
+
+      <input type="input" placeholder="username" name="username" value="">
+
+      <input type="password" placeholder="password" name="password" value="">
+
+      <input type="password" placeholder="confirm password" name="password_confirm" value="">
+
+      <button>SIGN UP</button>
+
+    </form>
+
+  </div>
+
+  <div class="account_info">
+    <!--  return message from account creation-->
+    <h3 class="message" id="<%= @type %>">
+      <%= @message %>
+    </h3>
+  </div>
+
+</div>

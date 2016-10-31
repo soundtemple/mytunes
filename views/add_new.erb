@@ -1,26 +1,18 @@
 <h2>Add New</h2>
 
-<!-- <textarea placeholder="Paste link to song" name="link_to_song" id="file "rows="4" cols="40"></textarea> -->
+<textarea placeholder="Paste link to song" name="link_to_song" id="file "rows="4" cols="40"></textarea>
 
-<p>Select a .mp3 file</p>
-<input type="file" id="file" />
+<input type="file" name="user_file" value="">
 
-<p>
-  <label>File Name:</label>
-  <span id="filename"></span>
-</p>
+<% mp3_file = File.open('/Users/Soundtemple/Downloads/Music to file/Rufus-Inner_Bloom_Sasha_Remix.mp3', "rb") %>
+<% tag = ID3Tag.read(mp3_file)%>
 
-<p>
-  <label>File Type:</label>
-  <span id="filetype"></span>
-</p>
+<p><%=  "Artist: #{tag.artist}" %></p>
+<p><%=  "Title:  #{tag.title}" %></p>
+<p><%=  "Album:  #{tag.album}" %></p>
+<p><%=  "Year:   #{tag.year}"  %></p>
+<p><%=  "Genre:  #{tag.genre}" %></p>
 
-<p>
-  <label>File Size:</label>
-  <span id="filesize"></span>
-</p>
 
-<p>
-  <label>Song Duration:</label>
-  <span id="duration"></span>
-</p>
+
+<img class="cover" src="data:image/jpg;base64,<%= Base64.encode64(tag.get_frames(:APIC).first.content) %>" alt="" />

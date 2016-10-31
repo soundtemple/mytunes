@@ -4,8 +4,13 @@ CREATE DATABASE mytunes;
 CREATE TABLE users (
   id SERIAL4 PRIMARY KEY,
   email VARCHAR(300),
-  password_digest VARCHAR(400)
+  password_digest VARCHAR(400),
+  username VARCHAR(100)
 );
+
+DELETE FROM users
+WHERE ID = 1;
+
 
 -- Belong to User.  Types:- All, Albums, Playlists, UpNext
 CREATE TABLE collections (
