@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/style.css" >
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js'></script>
+    <title>myTunes</title>
+  </head>
+
+
+<body>
+  <div class="container">
+
+    <header>
+      <div class="logo">
+        <a href="/">
+        <img id="logo" src="/images/logo.png" alt="" /></a>
+      </div>
+      <div class="nav">
+        <ul>
+          <li class="playlist"><a href="/up_next">Playlist</a>
+            <ul id="up_next">
+              <li class="active"><a href="/Volumes/HD2/Tims Music/Zenhiser Sample Pack/Demo Mini Songs/FunkatronicSampleLibraryDemoSong.mp3">Funkatronic Sample Library Demo</a></li>
+              <li><a href="/Users/Soundtemple/Music/iTunes/iTunes Media/Music/Tim Panalley/Waiting for the Sun/Tim Panalley-Get Wonky (Radio Edit).mp3">Tim Panalley - Get Wonky</a></li>
+              <li><a href="/Users/Soundtemple/Music/iTunes/iTunes Media/Music/Tim Panalley/Funkatronic/01 Feels Good.mp3">Tim Panalley - Feels Good</a></li>
+              <li><a href="/Users/Soundtemple/Music/iTunes/iTunes Media/Music/Tim Panalley/Funkatronic/02 Breathe Me In.mp3">Tim Panalley - Breathe Me In</a></li>
+              <li><a href="https://www.dropbox.com/s/wfhh1gldsvp9l3j/waterfalls%20of%20euphoria%20%28rough%20jam%20mix%29.mp3?dl=1">Tim Panalley - Waterfalls</a></li>
+
+            </ul>
+          </li>
+
+          <li class="tutorials"><a href="#">Collection</a>
+            <ul>
+              <li><a href="/playlists">Playlists</a></li>
+              <li><a href="/albums">Albums</a></li>
+              <li><a href="/songs">Songs</a></li>
+              <li><a href="/tags">Tags</a></li>
+              <li><a href="/new">+ add new</a></li>
+            </ul>
+          </li>
+          <li class="account"><a href="/account">Account</a>
+            <ul>
+                <li><a href="/about">About</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </header>
+      <div class="main">
+
+
+        <%= yield %>
+
+
+      </div>
+
+    <footer>
+      <audio id="audio" preload="auto" tabindex="0" controls="" type="audio/mpeg">
+          <source type="audio/mp3" src="">
+          Sorry, your browser does not support HTML5 audio.
+      </audio>
+
+    </footer>
+  </div>
+  <script src="/javascript/playlist.js"></script>
+
+</body>
+
+</html>
