@@ -1,1 +1,4 @@
-<h2>myTunes</h2>
+<% if logged_in? %>
+  <% user = current_user.username %>
+<% end %>
+<h2>myTunes <%= user %></h2>

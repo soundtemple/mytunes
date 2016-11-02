@@ -1,0 +1,34 @@
+<h2>Collection</h2>
+
+<div class="filter_by">
+  <label class="switch_label">All</label>
+  <label class="switch">
+    <input type="checkbox"><div class="slider round"></div>
+  </label>
+  <label class="switch_label">mp3</label>
+  <label class="switch">
+    <input type="checkbox"><div class="slider round"></div>
+  </label>
+  <label class="switch_label">Embed</label>
+  <label class="switch">
+    <input type="checkbox"><div class="slider round"></div>
+  </label>
+  <label class="switch_label">Video</label>
+  <label class="switch">
+    <input type="checkbox"><div class="slider round"></div>
+  </label>
+  <hr>
+
+</div>
+
+
+<div class="collection_container">
+  <% @collection.each do |song| %>
+    <div class="play_song"><a class="song_list"  href="<%= song.location_url %>"><img src="/images/play.gif" alt="" /></a></div>
+    <div class="artist"><p><a class="song_list" href="edit/<%= song.id %>"><%= song.artist %></a></p></div>
+    <div class="title"><p><%= song.title %></p></div>
+    <div class="album"><p><%= song.album %></p></div>
+    <div class="genre"><p><%= song.genre %></p></div>
+    <hr>
+  <% end %>
+</div>

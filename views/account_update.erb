@@ -1,0 +1,49 @@
+<h2>Account Update</h2>
+
+<div class="wrapper">
+
+  <div class="left_box">
+    <% if logged_in? %>
+      <h3>Update Account Info</h3>
+      <form class="" action="/account_update" method="post">
+        <input type="input" placeholder="" name="username" value="<%= current_user.username %>">
+
+        <input type="input" placeholder="" name="email" value="<%= current_user.email %>">
+
+        <input type="password" placeholder="password" name="password" value="">
+
+        <input type="password" placeholder="confirm password" name="password_confirmation" value="">
+
+        <button>Update Info</button>
+
+      </form>
+    <% end %>
+
+
+  </div>
+
+  <div class="right_box">
+    <% if logged_in? %>
+      <h3>Account Info</h3>
+      <p>Username: <%= current_user.username %></p>
+      <p>Email: <%= current_user.email %></p>
+      <p>Collections: </p>
+      <p>Songs: </p>
+    <% end %>
+
+  </div>
+
+  <div class="info">
+    <!--  return message from account creation-->
+    <% if @errors %>
+      <% @errors.each do |key, value| %>
+        <p class="message" id="<%= @type %>">
+        <%= key.to_s.upcase + " " + value.to_s -%></p>
+      <% end %>
+    <% end %>
+
+
+
+  </div>
+
+</div>

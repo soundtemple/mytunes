@@ -1,18 +1,39 @@
 <h2>Add New</h2>
 
-<textarea placeholder="Paste link to song" name="link_to_song" id="file "rows="4" cols="40"></textarea>
+<div class="wrapper">
+  <div class="left_box">
+    <form class="" action="/new" method="post">
+      <input type="input" placeholder="Artist" name="artist" value="">
 
-<input type="file" name="user_file" value="">
+      <input type="input" placeholder="Title" name="title" value="">
 
-<% mp3_file = File.open('/Users/Soundtemple/Downloads/Music to file/Rufus-Inner_Bloom_Sasha_Remix.mp3', "rb") %>
-<% tag = ID3Tag.read(mp3_file)%>
+      <input type="input" placeholder="Album" name="album" value="">
 
-<p><%=  "Artist: #{tag.artist}" %></p>
-<p><%=  "Title:  #{tag.title}" %></p>
-<p><%=  "Album:  #{tag.album}" %></p>
-<p><%=  "Year:   #{tag.year}"  %></p>
-<p><%=  "Genre:  #{tag.genre}" %></p>
+      <input type="input" placeholder="Genre" name="genre" value="">
 
+      <textarea placeholder="Paste link to song" name="location_url" id="file "rows="3" cols="40"></textarea>
 
+      <select>
+        <option value="mp3">mp3</option>
+        <option value="Embed">Embed</option>
+        <option value="video">Video Clip</option>
+      </select>
 
-<img class="cover" src="data:image/jpg;base64,<%= Base64.encode64(tag.get_frames(:APIC).first.content) %>" alt="" />
+      <button>Add New</button>
+    </form>
+  </div>
+
+  <div class="right_box">
+
+  <div class="info">
+    <!--  return message from account creation-->
+    <% if @message %>
+      <% @message.each do |key, value| %>
+        <p class="message" id="<%= @type %>">
+        <%= key.to_s.upcase + " " + value.to_s -%></p>
+      <% end %>
+    <% end %>
+
+  </div>
+
+</div>

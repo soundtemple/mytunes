@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="css/style.css" >
+    <link rel="stylesheet" href="/css/style.css" >
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js'></script>
     <title>myTunes</title>
   </head>
@@ -26,7 +26,7 @@
       <div class="nav">
         <ul>
           <li class="playlist"><a href="/up_next">Playlist</a>
-            <ul id="up_next">
+            <ul class="play_song">
               <li class="active"><a href="/Volumes/HD2/Tims Music/Zenhiser Sample Pack/Demo Mini Songs/FunkatronicSampleLibraryDemoSong.mp3">Funkatronic Sample Library Demo</a></li>
               <li><a href="/Users/Soundtemple/Music/iTunes/iTunes Media/Music/Tim Panalley/Waiting for the Sun/Tim Panalley-Get Wonky (Radio Edit).mp3">Tim Panalley - Get Wonky</a></li>
               <li><a href="/Users/Soundtemple/Music/iTunes/iTunes Media/Music/Tim Panalley/Funkatronic/01 Feels Good.mp3">Tim Panalley - Feels Good</a></li>
@@ -36,22 +36,19 @@
             </ul>
           </li>
           <li class="filter"><a href="#">Filter</a></li>
-          <li class="collection"><a href="#">Collection</a>
+          <li class="collection"><a href="/collection">Collection</a>
             <ul>
-              <li><a href="/playlists">Playlists</a></li>
-              <li><a href="/albums">Albums</a></li>
-              <li><a href="/songs">Songs</a></li>
-              <li><a href="/tags">Tags</a></li>
-              <li><a href="/new">+ add new</a></li>
+              <!-- <li><a href="/playlists">Playlists</a></li> -->
+              <!-- <li><a href="/albums">Albums</a></li> -->
+              <!-- <li><a href="/songs">Songs</a></li> -->
+              <!-- <li><a href="/tags">Tags</a></li> -->
+              <li><a href="/new">Add new</a></li>
+              <li><a href="/upload">Upload</a></li>
             </ul>
           </li>
-          <li class="more"> </li>
+          <li class="help"><a href="/help">Help</a></li>
           <li class="account"><a href="/account"><img src="/images/user.png" alt="" /></a>
-            <ul>
-                <li><a href="/account"><%= @action %></a></li>
-                <li><a href="/account"><%= @user %></a></li>
-                <li><a href="/about">About</a></li>
-            </ul>
+
           </li>
         </ul>
       </div>

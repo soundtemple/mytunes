@@ -1,0 +1,31 @@
+<h2>Upload</h2>
+
+
+
+<form action= "/upload" method="post" enctype= "multipart/form-data">
+  <input type="file" name="file" value="">
+  <button>Upload</button>
+</form>
+
+<% if @path %>
+  <% mp3_file = File.open(@path, "rb") %>
+  <% tag = ID3Tag.read(mp3_file)%>
+
+  <img class="cover" src="data:image/jpg;base64,<%= Base64.encode64(tag.get_frames(:APIC).first.content) %>" alt="" />
+
+  <form class="" action="/new" method="post">
+    <input type="input" placeholder="Artist" name="artist" value="<%= tag.artist %>">
+
+    <input type="input" placeholder="Title" name="title" value="<%= tag.title %>">
+
+    <input type="input" placeholder="Album" name="album" value="<%= tag.album %>">
+
+    <input type="input" placeholder="Genre" name="genre" value="<%= tag.genre  %>">
+
+    <textarea placeholder="Paste link to song" name="location_url" id="file "rows="3" cols="40"><%= @path %></textarea>
+
+    <button>Add New</button>
+
+  </form>
+
+<% end %>

@@ -7,8 +7,8 @@ init();
 function init(){
     current = 0;
     audio = $('audio');
-    playlist = $('#up_next');
-    tracks = playlist.find('li a');
+    playlist = $('.play_song');
+    tracks = playlist.find('a');
     len = tracks.length - 1;
     audio[0].volume = .5;
     audio[0].play();

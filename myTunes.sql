@@ -9,33 +9,36 @@ CREATE TABLE users (
 );
 
 DELETE FROM users
-WHERE ID = 1;
+WHERE ID = 5;
 
 
--- Belong to User.  Types:- All, Albums, Playlists, UpNext
-CREATE TABLE collections (
+-- Belong to User.  Types:- All, Albums, Playlists, UpNext - May have to add to user when created the All and UpNext playlists
+CREATE TABLE playlists (
   id SERIAL4 PRIMARY KEY,
   user_id INTEGER,
   name VARCHAR(400)
 );
 
-CREATE TABLE collection_types (
-  id SERIAL4 PRIMARY KEY,
-  user_id INTEGER,
-  name VARCHAR(400)
-);
 
--- Belong to collections.
+
+-- Belong to collections by default - USER, ALL,
 CREATE TABLE songs (
   id SERIAL4 PRIMARY KEY,
+  user_id INTEGER,
   location_url TEXT NOT NULL,
   artist VARCHAR(400),
   title VARCHAR(400),
-  bpm INTEGER,
-  key VARCHAR(100),
-  genre VARCHAR(400),
-  duration VARCHAR(100)
+  album VARCHAR(400),
+  genre VARCHAR(400)
 );
+
+
+-- Joining TABLE
+CREATE TABLE playlists_songs (
+  playlists_id INTEGER,
+  songs_id INTEGER
+);
+
 
 
 -- Belong to songs.

@@ -1,0 +1,48 @@
+<h2>Edit Song</h2>
+<div class="wrapper">
+
+  <div class="left_box">
+
+
+    <form class="" action="/edit/<%= @song.id %>" method="post">
+
+      <input type="input" placeholder="Artist" name="artist" value="<%= @song.artist %>">
+
+      <input type="input" placeholder="Title" name="title" value="<%= @song.title %>">
+
+      <input type="input" placeholder="Album" name="album" value="<%= @song.album %>">
+
+      <input type="input" placeholder="Genre" name="genre" value="<%= @song.genre %>">
+
+      <textarea placeholder="Paste link to song" name="location_url" id="file "rows="3" cols="40"><%= @song.location_url %></textarea>
+
+      <select>
+        <option value="mp3">mp3</option>
+        <option value="Embed">Embed</option>
+        <option value="video">Video Clip</option>
+      </select>
+      
+      <button>Update</button>
+      </form>
+
+  </div>
+
+
+  <div class="right_box">
+
+    <div class="info">
+      <!--  return message from account creation-->
+      <% if @message %>
+        <% @message.each do |key, value| %>
+          <p class="message" id="<%= @type %>">
+          <%= key.to_s.upcase + " " + value.to_s -%></p>
+        <% end %>
+      <% end %>
+    </div>
+    <form class="" action="/song/<%= @song.id %>/delete" method="post">
+      <button id="delete">DELETE</button>
+    </form>
+  </div>
+
+
+</div>
