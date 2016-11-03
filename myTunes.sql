@@ -29,9 +29,12 @@ CREATE TABLE songs (
   artist VARCHAR(400),
   title VARCHAR(400),
   album VARCHAR(400),
-  genre VARCHAR(400)
+  genre VARCHAR(400),
+  song_type VARCHAR(100)
 );
 
+ALTER TABLE songs ADD COLUMN song_type VARCHAR(100);
+ALTER TABLE songs ADD COLUMN song_file TEXT;
 
 -- Joining TABLE
 CREATE TABLE playlists_songs (
@@ -47,3 +50,6 @@ CREATE TABLE tags (
   description VARCHAR(100)
   -- FIELDS TO BE ADDED
 );
+
+
+UPDATE songs SET user_id = 11 WHERE user_id = nil;

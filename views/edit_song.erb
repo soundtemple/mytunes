@@ -16,12 +16,25 @@
 
       <textarea placeholder="Paste link to song" name="location_url" id="file "rows="3" cols="40"><%= @song.location_url %></textarea>
 
-      <select>
-        <option value="mp3">mp3</option>
-        <option value="Embed">Embed</option>
-        <option value="video">Video Clip</option>
+
+      <select name="song_type">
+        <% if @song.song_type == 'mp3' %>
+          <option value="mp3" selected>mp3</option>
+        <% else %>
+          <option value="mp3" >mp3</option>
+        <% end %>
+        <% if @song.song_type == 'embed' %>
+          <option value="embed" selected>Embed</option>
+        <% else %>
+          <option value="embed">Embed</option>
+        <% end %>
+        <% if @song.song_type == 'video' %>
+          <option value="video" selected>Video Clip</option>
+        <% else %>
+          <option value="video">Video Clip</option>
+        <% end %>
       </select>
-      
+
       <button>Update</button>
       </form>
 

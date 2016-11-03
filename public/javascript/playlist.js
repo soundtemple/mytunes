@@ -36,3 +36,54 @@ function run(link, player){
         audio[0].load();
         audio[0].play();
 }
+
+
+// ON START
+$('.showing_mp3').hide();
+$('.showing_embed').hide();
+$('.showing_video').hide();
+$('.show_media').hide();
+
+
+// DISPLAY collection
+$('#show_mp3').change(function () {
+  if($(this).is(":checked")) {
+    $('.showing_mp3').show();
+    return;
+    }
+  $('.showing_mp3').hide();
+});
+
+$('#show_embed').change(function () {
+  if($(this).is(":checked")) {
+    $('.showing_embed').show();
+    return;
+    }
+  $('.showing_embed').hide();
+});
+
+$('#show_video').change(function () {
+  if($(this).is(":checked")) {
+    $('.showing_video').show();
+    return;
+    }
+  $('.showing_video').hide();
+});
+
+
+
+
+
+
+
+// handle toggles for media embed and video types to display embed media:
+$( ".toggle_media" ).click(function(e) {
+  e.preventDefault();
+  ($(e.target).closest('.showing_embed').find('.show_media').toggle(200))
+});
+
+$( ".toggle_media" ).click(function(e) {
+  console.log($( ".toggle_media" ));
+  e.preventDefault();
+  ($(e.target).closest('.showing_video').find('.show_media').toggle(200))
+});

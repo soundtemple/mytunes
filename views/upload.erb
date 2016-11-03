@@ -1,31 +1,63 @@
-<h2>Upload</h2>
+
+
+<div class="wrapper">
+  <div class="left_box">
+    <h2>Upload</h2>
+
+    <form action= "/new" method="post" enctype= "multipart/form-data">
+      <input type="file" name="file" value="">
+      <button>Upload</button>
+    </form>
 
 
 
-<form action= "/upload" method="post" enctype= "multipart/form-data">
-  <input type="file" name="file" value="">
-  <button>Upload</button>
-</form>
 
-<% if @path %>
-  <% mp3_file = File.open(@path, "rb") %>
-  <% tag = ID3Tag.read(mp3_file)%>
 
-  <img class="cover" src="data:image/jpg;base64,<%= Base64.encode64(tag.get_frames(:APIC).first.content) %>" alt="" />
+    <div class="info">
+      <!--  return message from account creation-->
+      <% if @message %>
+        <% @message.each do |key, value| %>
+          <p class="message" id="<%= @type %>">
+          <%= key.to_s.upcase + " " + value.to_s -%></p>
+        <% end %>
+      <% end %>
 
-  <form class="" action="/new" method="post">
-    <input type="input" placeholder="Artist" name="artist" value="<%= tag.artist %>">
+    </div>
 
-    <input type="input" placeholder="Title" name="title" value="<%= tag.title %>">
+  </div>
 
-    <input type="input" placeholder="Album" name="album" value="<%= tag.album %>">
+  <div class="right_box">
+     <% if @new_song %>
 
-    <input type="input" placeholder="Genre" name="genre" value="<%= tag.genre  %>">
+    <h2>Update Details</h2>
+    <form class="" action="/edit/<%= @new_song.id %>" method="post">
+        <input type="input" placeholder="Artist" name="artist" value="<%= @new_song.artist %>">
 
-    <textarea placeholder="Paste link to song" name="location_url" id="file "rows="3" cols="40"><%= @path %></textarea>
+        <input type="input" placeholder="Title" name="title" value="<%= @new_song.title %>">
 
-    <button>Add New</button>
+        <input type="input" placeholder="Album" name="album" value="<%= @new_song.album %>">
 
-  </form>
+        <input type="input" placeholder="Genre" name="genre" value="<%= @new_song.genre  %>">
 
-<% end %>
+        <textarea placeholder="Paste link to song" name="location_url" id="file "rows="3" cols="40"><%= @new_song.get_song_url %></textarea>
+
+        <select name="song_type">
+          <option value="mp3">mp3</option>
+          <option value="embed">Embed</option>
+          <option value="video">Video Clip</option>
+        </select>
+
+        <button>Update</button>
+
+
+
+      </form>
+
+    <% end %>
+  </div>
+
+
+</div>
+
+
+</div>

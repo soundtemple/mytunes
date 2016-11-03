@@ -3,7 +3,11 @@ require 'id3tag'
 require 'sinatra/reloader'
 require 'pry'
 require 'Base64'
+require 'carrierwave'
+require 'carrierwave/orm/activerecord'
+require 'fog'
 require_relative 'db_config'
+require_relative 'fog_credentials'
 require_relative 'models/user'
 require_relative 'models/song'
 
@@ -13,6 +17,11 @@ helpers do
 # double negation. turns object to true or false
   def logged_in?
     !!current_user
+  end
+
+  # track where user came from
+  def origin_path(last_page)
+    session[:origin_path] = last_page
   end
 
 # finds id of current user
@@ -55,10 +64,10 @@ post '/new_user' do
   new_user.email = params[:email]
   new_user.username = params[:username]
   new_user.password = params[:password]
-  if new_user.valid? == false
+  if !new_user.valid?
     @errors = new_user.errors.messages
     return erb :account
-  elsif new_user.valid? == true
+  elsif new_user.valid?
     new_user.save
     @errors = ["Success. Welcome to myTunes."]
     @type = "success"
@@ -97,51 +106,78 @@ get '/' do
 end
 
 get '/upload' do
+  origin_path('upload')
   erb :upload
 end
 
-post '/upload' do
-  unless params[:file] &&
-         (tmpfile = params[:file][:tempfile]) &&
-         (name = params[:file][:filename])
-    @error = "No file selected"
-    return haml(:upload)
-  end
-  while blk = tmpfile.read(65536)
-    # TODO File.write to location ??? ASK
-    # TODO Path = new loaction
-  end
-  @path = params[:file][:tempfile].path
-  erb :upload
-end
+# post '/upload' do
+#   unless params[:file] &&
+#          (tmpfile = params[:file][:tempfile]) &&
+#          (name = params[:file][:filename])
+#     @error = "No file selected"
+#     return haml(:upload)
+#   end
+#   while blk = tmpfile.read(65536)
+#     # TODO File.write to location ??? ASK
+#     # TODO Path = new loaction
+#   end
+#   @path = params[:file][:tempfile].path
+#   erb :upload
+# end
+
 
 
 get '/new' do
+  origin_path('new')
   erb :add_new
 end
 
 post '/new' do
   @type = "warning"
   @new_song = Song.new
-  @new_song.artist = params[:artist]
-  @new_song.title = params[:title]
-  @new_song.album = params[:album]
-  @new_song.genre = params[:genre]
-  @new_song.location_url = params[:location_url]
+  # for file uploads only
+  if session[:origin_path] == 'upload'
+    @path = params[:file][:tempfile].path
+    mp3_file = File.open(@path, "rb")
+    tag = ID3Tag.read(mp3_file)
+    @new_song.artist = tag.artist
+    @new_song.title = tag.title
+    @new_song.album = tag.album
+    @new_song.genre = tag.genre
+    @new_song.song_type = 'mp3'
+    @new_song.song_file = params[:file]
+    @new_song.location_url = 'temp'
+  end
+  if session[:origin_path] != 'upload'
+    @new_song.location_url = params[:location_url]
+    @new_song.artist = params[:artist]
+    @new_song.title = params[:title]
+    @new_song.album = params[:album]
+    @new_song.genre = params[:genre]
+    @new_song.song_type = params[:song_type]
+  end
+
+  @new_song.user_id = User.find(current_user.id)
   if @new_song.valid? == false
     @message = @new_song.errors.messages
-    return erb :add_new
+    # return erb :add_new
   elsif @new_song.valid? == true
+    @new_song.user_id = current_user.id
     @new_song.save
     @message = ["Success. Song added."]
     @type = "success"
     user = User.find_by(email: params[:email])
+    # erb :add_new
+  end
+  if session[:origin_path] == 'upload'
+    erb :upload
+  else
     erb :add_new
   end
 end
 
 get '/collection' do
-  @collection = Song.all
+  @collection = Song.where(user_id: current_user.id)
   erb :collection
 end
 
@@ -155,7 +191,9 @@ post '/edit/:id' do
   @song.title = params[:title]
   @song.artist = params[:artist]
   @song.genre = params[:genre]
+  @song.album = params[:album]
   @song.location_url = params[:location_url]
+  @song.song_type = params[:song_type]
   @song.save
   @type = "success"
   @message = ["Song updated"]

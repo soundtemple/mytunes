@@ -22,6 +22,17 @@
         <button>LOGIN</button>
     <% end %>
       </form>
+
+
+    <div class="info">
+      <!--  return message from account creation-->
+      <% if @errors %>
+        <% @errors.each do |key, value| %>
+          <p class="message" id="<%= @type %>">
+          <%= key.to_s.upcase + " " + value.to_s -%></p>
+        <% end %>
+      <% end %>
+    </div>
   </div>
 
   <div class="right_box">
@@ -50,14 +61,6 @@
 
   </div>
 
-  <div class="info">
-    <!--  return message from account creation-->
-    <% if @errors %>
-      <% @errors.each do |key, value| %>
-        <p class="message" id="<%= @type %>">
-        <%= key.to_s.upcase + " " + value.to_s -%></p>
-      <% end %>
-    <% end %>
-  </div>
+
 
 </div>

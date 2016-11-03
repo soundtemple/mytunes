@@ -1,34 +1,77 @@
-<h2>Collection</h2>
+<div class="sub_header">
 
-<div class="filter_by">
-  <label class="switch_label">All</label>
-  <label class="switch">
-    <input type="checkbox"><div class="slider round"></div>
-  </label>
-  <label class="switch_label">mp3</label>
-  <label class="switch">
-    <input type="checkbox"><div class="slider round"></div>
-  </label>
-  <label class="switch_label">Embed</label>
-  <label class="switch">
-    <input type="checkbox"><div class="slider round"></div>
-  </label>
-  <label class="switch_label">Video</label>
-  <label class="switch">
-    <input type="checkbox"><div class="slider round"></div>
-  </label>
-  <hr>
 
+  <div class="filter_by">
+    <div class="collection_header">
+      <h2><%= current_user.username %>'s Collection</h2>
+    </div>
+    <!-- <label class="switch_label">All</label>
+    <label class="switch">
+      <input type="checkbox" id="show_library"><div class="slider round"></div>
+    </label> -->
+    <label class="switch_label">mp3</label>
+    <label class="switch">
+      <input type="checkbox" id="show_mp3"><div class="slider round"></div>
+    </label>
+    <label class="switch_label">Embed</label>
+    <label class="switch">
+      <input type="checkbox" id="show_embed"><div class="slider round"></div>
+    </label>
+    <label class="switch_label">Video</label>
+    <label class="switch">
+      <input type="checkbox" id="show_video"><div class="slider round"></div>
+    </label>
+
+
+  </div>
 </div>
+
 
 
 <div class="collection_container">
   <% @collection.each do |song| %>
-    <div class="play_song"><a class="song_list"  href="<%= song.location_url %>"><img src="/images/play.gif" alt="" /></a></div>
-    <div class="artist"><p><a class="song_list" href="edit/<%= song.id %>"><%= song.artist %></a></p></div>
-    <div class="title"><p><%= song.title %></p></div>
-    <div class="album"><p><%= song.album %></p></div>
-    <div class="genre"><p><%= song.genre %></p></div>
-    <hr>
+    <% if song.song_type == 'mp3' %>
+      <div class="showing_mp3">
+        <div class="play_song"><a class="song_list"  href="<%= song.get_song_url %>"><img src="/images/play.gif" alt="" /></a></div>
+        <div class="artist"><p><a class="song_list" href="edit/<%= song.id %>"><%= song.artist %></a></p></div>
+        <div class="title"><p><%= song.title %></p></div>
+        <div class="album"><p><%= song.album %></p></div>
+        <div class="genre"><p><%= song.genre %></p></div>
+        <hr>
+      </div>
+
+
+    <% elsif song.song_type == 'embed'%>
+      <div class="showing_embed">
+        <div class="play_media"><a class="song_list toggle_media" id="song<%= song.id %>" href=""><img src="/images/embed.png" alt="" /></a></div>
+        <div class="artist"><p><a class="song_list" href="edit/<%= song.id %>"><%= song.artist %></a></p></div>
+        <div class="title"><p><%= song.title %></p></div>
+        <div class="album"><p><%= song.album %></p></div>
+        <div class="genre"><p><%= song.genre %></p></div>
+        <div class="embed show_media"><%= song.location_url %></div>
+        <hr>
+      </div>
+
+    <% elsif song.song_type == 'video'%>
+      <div class="showing_video">
+        <div class="play_media"><a class="song_list toggle_media" id="song<%= song.id %>" href=""><img src="/images/video.png" alt="" /></a></div>
+        <div class="artist"><p><a class="song_list" href="edit/<%= song.id %>"><%= song.artist %></a></p></div>
+        <div class="title"><p><%= song.title %></p></div>
+        <div class="album"><p><%= song.album %></p></div>
+        <div class="genre"><p><%= song.genre %></p></div>
+        <div class="video_container">
+            <div class="video">
+              <div class="video_wrapper show_media"><%= song.location_url %>
+              </div>
+            </div>
+        </div>
+        <hr>
+      </div>
+    <% else %>
+      <div class="artist"><p><a class="song_list" href="edit/<%= song.id %>">NO VALID ARTIST TYPE</a></p></div>
+      <div class="title"><p>NO VALID TITLE TYPE</p></div>
+      <hr>
+    <% end %>
+
   <% end %>
 </div>

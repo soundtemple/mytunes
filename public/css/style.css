@@ -20,6 +20,7 @@ header {
   width: 100%;
   top: 0;
   height: 80px;
+  z-index: 999;
 }
 
 footer {
@@ -81,6 +82,7 @@ h1 {
 
 h2 {
   color: #444;
+  margin-bottom: 0;
 }
 
 h3 {
@@ -145,6 +147,11 @@ input[type="checkbox"] {
   margin: 1%;
 }
 
+.collection_header {
+  display: inline-block;
+  padding-right: 3%;
+}
+
 label.switch {
   vertical-align: middle;
 }
@@ -159,6 +166,8 @@ label.switch {
   color: #444;
   padding: 1%;
 }
+
+
 
 /* The slider */
 .slider {
@@ -235,15 +244,27 @@ select {
   margin: auto;
 }
 
-.account img {
+.menu img {
   width: 30px;
   vertical-align: middle;
 }
 
+.sub_header {
+  z-index: 998;
+  position: fixed;
+  height: 10%;
+  width: 91%;
+  top: 80px;
+  background-color: white;
+
+
+}
+
 .filter_by {
-  width: 90%;
+  width: 100%;
   display: block;
   margin: auto;
+  border-bottom: 1px solid #444;
 }
 
 .filter {
@@ -259,26 +280,59 @@ select {
 }
 
 .collection_container {
-  width: 90%;
-  margin: auto;
+  width: 100%;
+  padding-top: 50px;
+  margin: 0 auto;
 }
 
-.play_song {
+.play_song, .play_media {
   display: inline-block;
-  width: 5%;
+  width: 4%;
+  vertical-align: middle;
+  /*background-color: blue;*/
+  background-image: url(../images/play.gif);
 }
-.play_song img {
+.play_song img, .play_media img {
   width: 30px;
-  vertical-align: bottom;
+
 }
 .artist, .title {
-  width: 25%;
+  width: 23%;
   display: inline-block;
 }
 
 .album, .genre {
-  width: 15%;
+  width: 23%;
   display: inline-block;
+}
+
+.video_container {
+  display: block;
+}
+
+.video, .video_details {
+  display: inline-block;
+  width: 40%;
+}
+
+
+
+
+.video_wrapper {
+    float: none;
+    clear: both;
+    width: 100%;
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 0px;
+    height: 0;
+}
+.video_wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
 .song_list {
@@ -373,7 +427,7 @@ select {
    Using 650px
 ********************************************/
 
-@media screen and (min-width: 750px) {
+@media screen and (min-width: 450px) {
   .nav {
     width: 60%;
     display: inline-block;
@@ -384,7 +438,7 @@ select {
 
 
   .nav li {
-    min-width: 100px;
+    min-width: 60px;
     border-bottom: none;
     font-size: 1.4em;
     display: inline-block;
