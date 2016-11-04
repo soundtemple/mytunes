@@ -8,16 +8,7 @@ CREATE TABLE users (
   username VARCHAR(100)
 );
 
-DELETE FROM users
-WHERE ID = 5;
 
-
--- Belong to User.  Types:- All, Albums, Playlists, UpNext - May have to add to user when created the All and UpNext playlists
-CREATE TABLE playlists (
-  id SERIAL4 PRIMARY KEY,
-  user_id INTEGER,
-  name VARCHAR(400)
-);
 
 
 
@@ -30,26 +21,18 @@ CREATE TABLE songs (
   title VARCHAR(400),
   album VARCHAR(400),
   genre VARCHAR(400),
-  song_type VARCHAR(100)
+  song_type VARCHAR(100),
+  song_file TEXT
 );
 
+
+
+
+-- OTHER....
 ALTER TABLE songs ADD COLUMN song_type VARCHAR(100);
 ALTER TABLE songs ADD COLUMN song_file TEXT;
 
--- Joining TABLE
-CREATE TABLE playlists_songs (
-  playlists_id INTEGER,
-  songs_id INTEGER
-);
+DELETE FROM users
+WHERE ID = 5;
 
-
-
--- Belong to songs.
-CREATE TABLE tags (
-  id SERIAL4 PRIMARY KEY,
-  description VARCHAR(100)
-  -- FIELDS TO BE ADDED
-);
-
-
-UPDATE songs SET user_id = 11 WHERE user_id = nil;
+UPDATE songs SET user_id = 11;
