@@ -1,7 +1,7 @@
 require 'sinatra'
 require 'id3tag'
 require 'pry'
-require 'Base64'
+require 'base64'
 require 'carrierwave'
 require 'carrierwave/orm/activerecord'
 require 'fog'
