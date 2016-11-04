@@ -1,6 +1,5 @@
 require 'sinatra'
 require 'id3tag'
-require 'sinatra/reloader'
 require 'pry'
 require 'Base64'
 require 'carrierwave'
