@@ -102,32 +102,26 @@ end
 
 
 get '/' do
+  if logged_in?
+     return redirect to '/collection'
+  end
   erb :index
 end
 
 get '/upload' do
+  if !logged_in?
+     return erb :index
+  end
   origin_path('upload')
   erb :upload
 end
 
-# post '/upload' do
-#   unless params[:file] &&
-#          (tmpfile = params[:file][:tempfile]) &&
-#          (name = params[:file][:filename])
-#     @error = "No file selected"
-#     return haml(:upload)
-#   end
-#   while blk = tmpfile.read(65536)
-#     # TODO File.write to location ??? ASK
-#     # TODO Path = new loaction
-#   end
-#   @path = params[:file][:tempfile].path
-#   erb :upload
-# end
-
 
 
 get '/new' do
+  if !logged_in?
+     return erb :index
+  end
   origin_path('new')
   erb :add_new
 end
@@ -177,11 +171,16 @@ post '/new' do
 end
 
 get '/collection' do
+  origin_path('collection')
+  if !logged_in?
+     return erb :index
+  end
   @collection = Song.where(user_id: current_user.id)
   erb :collection
 end
 
 get '/edit/:id' do
+  origin_path('edit')
   @song = Song.find(params[:id])
   erb :edit_song
 end
@@ -197,7 +196,11 @@ post '/edit/:id' do
   @song.save
   @type = "success"
   @message = ["Song updated"]
-  erb :edit_song
+  if session[:origin_path] == 'upload'
+    erb :upload
+  else
+    erb :edit_song
+  end
 end
 
 post '/song/:id/delete' do

@@ -96,6 +96,20 @@ p {
   font-size: 1em;
 }
 
+.home_page {
+  font-size: 1.4em;
+}
+
+.home_page a {
+  text-decoration: none;
+  color: #444;
+}
+
+.home_page a:hover {
+  text-decoration: none;
+  color: #999;
+}
+
 input {
   display: block;
   border: none;
@@ -104,8 +118,8 @@ input {
   padding: 2%;
   color: #444;
   width: 75%;
-  padding-top: 5%;
-  padding-bottom: 5%;
+  padding-top: 4%;
+  padding-bottom: 4%;
 }
 
 button {
